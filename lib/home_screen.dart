@@ -101,15 +101,28 @@ class _homeScreen extends State<homeScreen> {
                   if (_results != null)
                     ..._results!.map((result) {
                       return Card(
+                        color: Colors.limeAccent.shade100,
                         child: Container(
                           margin: const EdgeInsets.all(10),
                           child: Text(
                             result['label'].toString().split('label:').last,
-                            style: const TextStyle(color: Colors.red, fontSize: 20),
+                            style: const TextStyle(color: Colors.black, fontSize: 20,),
                           ),
                         ),
                       );
                     }).toList(),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      getTreatment(_results.toString().split('label:').last.replaceAll(RegExp(r'[}\]]'), '')),
+
+                      style: TextStyle(
+                        fontSize: 18.0,
+
+                      ),
+
+                    ),
+                  ),
                 ],
               ),
             ],

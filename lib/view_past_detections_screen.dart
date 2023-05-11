@@ -54,13 +54,14 @@ class _PastDetectionState extends State<PastDetection> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 5.0),
+                        SizedBox(height: 4.0),
                         Text(
                           "${snapshot.data?.docs[index]['classification']}",
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
                         ),
+                        SizedBox(height:10,),
 
 
                         ElevatedButton(

@@ -160,7 +160,7 @@ class _homeScreen extends State<homeScreen> {
       'treatment': getTreatment(classify),
 
     });
-      }
+  }
 
 
   Future pickFromCamera() async {
@@ -193,7 +193,7 @@ class _homeScreen extends State<homeScreen> {
 
   }
 
-   getTreatment(classification){
+  getTreatment(classification){
     print(classification);
     if (classification.trim() == 'Apple Blackrot') {
       return 'Fungicide treatments can be effective in controlling apple black rot. It is recommended to apply the fungicide before the disease appears, as a preventative measure. Removing and destroying infected fruit and canes can also help reduce the spread of the disease.';

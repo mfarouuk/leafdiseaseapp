@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>615101860965-krlhctp0rh9gueu2k0nthmik18eqrmsn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.615101860965-krlhctp0rh9gueu2k0nthmik18eqrmsn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>615101860965-h5lff4skuajjqu395iv7g7kq2pflbv6r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAnfinFZhlddnI4RDn8wQAELfSINGnrCnU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>615101860965</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.leafdisease</string>
+	<key>PROJECT_ID</key>
+	<string>login-leafdisease</string>
+	<key>STORAGE_BUCKET</key>
+	<string>login-leafdisease.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:615101860965:ios:109a9d9f86798606130a8c</string>
+</dict>
+</plist>

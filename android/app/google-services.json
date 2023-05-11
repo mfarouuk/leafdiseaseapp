@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "615101860965",
+    "project_id": "login-leafdisease",
+    "storage_bucket": "login-leafdisease.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615101860965:android:796916a65200cd21130a8c",
+        "android_client_info": {
+          "package_name": "com.example.leafdisease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615101860965-h5lff4skuajjqu395iv7g7kq2pflbv6r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.leafdisease",
+            "certificate_hash": "65bf8f24270685751ed4ba503ac1f6375074fec3"
+          }
+        },
+        {
+          "client_id": "615101860965-hg5lr91jsm7its45n62phab74a1b2rnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWCS4vMjEQTNs-0scuAaqvPZF_qHebX5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615101860965-hg5lr91jsm7its45n62phab74a1b2rnq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615101860965-krlhctp0rh9gueu2k0nthmik18eqrmsn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.leafdisease"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

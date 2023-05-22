@@ -24,21 +24,21 @@ class _manageAccount extends State<manageAccount> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlue.shade900,
-          title: Text("Account"),
-          centerTitle: true,
-        ),
-      body: ListView(
-        padding: EdgeInsets.all(12),
-        physics: BouncingScrollPhysics(),
-        children: [
-          Container(height: 35,),
-          userTile(),
-          divider(),
-          colorTiles(),
-        ],
-      )
+          appBar: AppBar(
+            backgroundColor: Colors.lightBlue.shade900,
+            title: Text("Account"),
+            centerTitle: true,
+          ),
+          body: ListView(
+            padding: EdgeInsets.all(12),
+            physics: BouncingScrollPhysics(),
+            children: [
+              Container(height: 35,),
+              userTile(),
+              divider(),
+              colorTiles(),
+            ],
+          )
       ),
     );
   }
@@ -64,7 +64,7 @@ class _manageAccount extends State<manageAccount> {
         divider(),
 
 
-        colortile(Icons.help, Colors.green.shade300, "About", (){
+        colortile(Icons.help, Colors.teal, "About", (){
 
           Navigator.push(
             context,
@@ -85,7 +85,7 @@ class _manageAccount extends State<manageAccount> {
       ],
 
     );
-    }
+  }
 
   Widget userTile() {
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -102,6 +102,8 @@ class _manageAccount extends State<manageAccount> {
         if (!snapshot.hasData) {
           return Text('Loading...');
         }
+
+
         final userData = snapshot.data!.data() as Map<String, dynamic>;
         final name = userData['name'];
         final email = userData['email'];
@@ -126,12 +128,12 @@ class _manageAccount extends State<manageAccount> {
     );
   }
   Widget divider () {
-  return Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Divider(
-  thickness: 1.5,
-  ),
-  );
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Divider(
+        thickness: 1.5,
+      ),
+    );
   }
   Widget colortile(IconData icon, Color color, String text, VoidCallback onTap) {
     return GestureDetector(

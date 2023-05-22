@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class ViewDetails extends StatelessWidget {
   final String photoUrl;
-  final String classificationName;
+  final String  classificationName;
   final String treatment;
 
   const ViewDetails({
@@ -26,51 +26,57 @@ class ViewDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.network(
-                  photoUrl,
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Container(
+                  width: double.infinity,
                   height: 300,
-                  width: 300,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    image: DecorationImage(
+                      image: NetworkImage(photoUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 20.0),
               Center(
                 child: Text(
-                   classificationName,
-             
+                  classificationName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-
+                    fontSize: 24.0,
                   ),
+
                 ),
               ),
-              SizedBox(height: 10.0),
-              Center(
-                child: Text(
+              SizedBox(height: 20.0),
+              Text(
                 treatment,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
+                style: TextStyle(
+                  fontSize: 18.0,
+
                 ),
               ),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
+                  SizedBox(width: 20.0),
 
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+
 }

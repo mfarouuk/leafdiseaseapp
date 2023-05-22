@@ -1,19 +1,16 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:spincircle_bottom_bar/modals.dart';
 import 'package:spincircle_bottom_bar/spincircle_bottom_bar.dart';
-import 'package:leafdisease/manageAccount_screen.dart';
 import 'package:tflite/tflite.dart';
+import 'guest_account.dart';
 
 
-class homeScreen extends StatefulWidget{
+class guesthomeScreen extends StatefulWidget{
   @override
-  _homeScreen createState() => _homeScreen();
+  _guesthomeScreen createState() => _guesthomeScreen();
 
   void initState()  {
     loadModel();
@@ -27,15 +24,15 @@ Future loadModel() async {
   }
 }
 
-class _homeScreen extends State<homeScreen> {
-  String userId = FirebaseAuth.instance.currentUser!.uid;
+class _guesthomeScreen extends State<guesthomeScreen> {
+
   File? _image;
   List? _results;
   bool imageSelect= false;
-  String? name = FirebaseAuth.instance.currentUser!.displayName;
   bool showWelcomeMessage = true;
 
   // get classify => _results.toString().split('label:').last.replaceAll(RegExp(r'[}\]]'),'');
+
 
   void clearResults() {
     setState(() {
@@ -45,6 +42,7 @@ class _homeScreen extends State<homeScreen> {
       showWelcomeMessage=true;
     });
   }
+
   @override
   void initState()
   {
@@ -66,138 +64,150 @@ class _homeScreen extends State<homeScreen> {
       _results=recognitions!;
       _image=image;
       imageSelect=true;
-      showWelcomeMessage=false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: SpinCircleBottomBarHolder(
-          bottomNavigationBar: SCBottomBarDetails(
-            items: [
-              SCBottomBarItem(icon: Icons.home, onPressed: (){}),
-              SCBottomBarItem(icon: Icons.account_circle, onPressed: (){
-          clearResults();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  manageAccount()),
+        child: Scaffold(
+            body: SpinCircleBottomBarHolder(
+                bottomNavigationBar: SCBottomBarDetails(
+                  items: [
+                    SCBottomBarItem(icon: Icons.home, onPressed: (){}),
+                    SCBottomBarItem(icon: Icons.account_circle, onPressed: (){
+                      clearResults();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  guestManageAccount()),
 
 
-                );
-              }),
-            ],
-            circleItems: [
-              SCItem(icon: Icon(Icons.camera_alt), onPressed: pickFromCamera),
-              SCItem(icon: Icon(Icons.photo), onPressed: pickFromGallery),
-            ],
-          ),
-          child: Column(
+                      );
+                    }),
+                  ],
+                  circleItems: [
+                    SCItem(icon: Icon(Icons.camera_alt), onPressed: pickFromCamera),
+                    SCItem(icon: Icon(Icons.photo), onPressed: pickFromGallery),
+                  ],
+                ),
+                child: Column(
 
-            children: [
-           Card(
-  elevation: 4,
-  margin: EdgeInsets.all(16.0),
-  child: Padding(
-    padding: EdgeInsets.all(16.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showWelcomeMessage)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Welcome to the Application!',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'Instructions:',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                '1. Press the + button located at the bottom of the screen.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                '2. Choose whether to capture an image from the camera or select one from the gallery.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                '3. The selected image will be displayed on the screen.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                '4. If applicable, any detected results or classifications will be shown below the image.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 16.0),
-            ],
-          ),
-              Column(
-                children: [
-                  if (_image != null)
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Image.file(_image!),
-                    ),
-                  if (_results != null)
+                    children: [
+                      Card(
+                        elevation: 4,
+                        margin: EdgeInsets.all(16.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (showWelcomeMessage)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Welcome to the Application!',
+                                      style: TextStyle(
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(height: 16.0),
+                                    Text(
+                                      'Instructions:',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Text(
+                                      '1. Press the + button located at the bottom of the screen.',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Text(
+                                      '2. Choose whether to capture an image from the camera or select one from the gallery.',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Text(
+                                      '3. The selected image will be displayed on the screen.',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Text(
+                                      '4. If applicable, any detected results or classifications will be shown below the image.',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 16.0),
+                                  ],
+                                ),
+                              Column(
+                                children: [
+                                  if (_image != null)
+                                    Container(
+                                      margin: const EdgeInsets.all(10),
+                                      child: Image.file(_image!),
+                                    ),
+                                  if (_results != null)
 
-                    ..._results!.map((result) {
-                      showWelcomeMessage=false;
-                      return Card(
-                        color: Colors.limeAccent.shade100,
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Text(
-                            result['label'].toString().split('label:').last,
-                            style: const TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold,),
+                                    ..._results!.map((result) {
+                                      showWelcomeMessage=false;
+                                      return Card(
+                                        color: Colors.limeAccent.shade100,
+                                        child: Container(
+                                          margin: const EdgeInsets.all(10),
+                                          child: Text(
+                                            result['label'].toString().split('label:').last,
+                                            style: const TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold,),
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Text(
+                                      getTreatment(_results.toString().split('label:').last.replaceAll(RegExp(r'[}\]]'), '')),
+
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    }).toList(),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      getTreatment(_results.toString().split('label:').last.replaceAll(RegExp(r'[}\]]'), '')),
-
-                      style: TextStyle(
-                        fontSize: 18.0,
-
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    ])
-    )
-    )
+                    ])
+            )
+        )
     );
   }
+
+
+  // Future addDetection(String userId, String classification, String imageUrl) {
+  //   CollectionReference detections = FirebaseFirestore.instance.collection('detections');
+  //   return detections.add({
+  //     'userId': userId,
+  //     'classification': classification,
+  //     'imageUrl': imageUrl,
+  //
+  //   })
+  //       .then((value) => print('Detection added'))
+  //       .catchError((error) => print('Failed to add detection: $error'));
+  // }
 
   Future  pickFromGallery() async {
     final ImagePicker _picker = ImagePicker();
@@ -206,27 +216,9 @@ class _homeScreen extends State<homeScreen> {
     );
     File image=File(pickedFile!.path);
     imageClassification(image);
-    //addDetection(userId, this._results.toString(), _image.toString());
-    String fileName = 'images/${DateTime.now().millisecondsSinceEpoch}.jpg';
-    Reference ref = FirebaseStorage.instance.ref().child(fileName);
-    UploadTask uploadTask = ref.putFile(image);
-    TaskSnapshot taskSnapshot = await uploadTask;
-    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
 
-    CollectionReference detections = FirebaseFirestore.instance.collection('detections');
-    dynamic classify = _results
-        .toString()
-        .split('label:')
-        .last
-        .replaceAll(RegExp(r'[}\]]'), '');
-    await detections.add({
-      'userId': userId,
-      'imgURL': downloadUrl,
-      'classification': classify,
-      'treatment': getTreatment(classify),
 
-    });
   }
 
 
@@ -238,29 +230,10 @@ class _homeScreen extends State<homeScreen> {
     File image=File(pickedFile!.path);
     imageClassification(image);
 
-    String fileName = 'images/${DateTime.now().millisecondsSinceEpoch}.jpg';
-    Reference ref = FirebaseStorage.instance.ref().child(fileName);
-    UploadTask uploadTask = ref.putFile(image);
-    TaskSnapshot taskSnapshot = await uploadTask;
-    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-    CollectionReference detections = FirebaseFirestore.instance.collection('detections');
-
-    dynamic classify = _results
-        .toString()
-        .split('label:')
-        .last
-        .replaceAll(RegExp(r'[}\]]'), '');
-
-    await detections.add({
-      'userId': userId,
-      'imgURL': downloadUrl,
-      'classification': classify,
-      'treatment': getTreatment(classify),
-    });
-
   }
 
   getTreatment(classification){
+    print(classification);
     if (classification.trim() == 'Apple Blackrot') {
       return 'Fungicide treatments can be effective in controlling apple black rot. It is recommended to apply the fungicide before the disease appears, as a preventative measure. Removing and destroying infected fruit and canes can also help reduce the spread of the disease.';
     } else if (classification.trim() == 'Apple Cedar apple rust') {
@@ -370,7 +343,9 @@ class _homeScreen extends State<homeScreen> {
     }
     else if (classification.trim() == 'Tomato healthy') {
       return 'No specific treatment is required. Monitor the plants for any signs of disease or pests.';
-    } else {
+    }
+    else{
+
       return '';
     }
 

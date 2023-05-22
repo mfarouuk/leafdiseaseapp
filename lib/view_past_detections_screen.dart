@@ -33,37 +33,39 @@ class _PastDetectionState extends State<PastDetection> {
           backgroundColor: Colors.lightBlue.shade900,
         ),
         body: StreamBuilder(
-            stream: collection
-                .where('userId', isEqualTo:uid )
-
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text("Error");
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text("loding ....");
-              }
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //return Text("${snapshot.data?.docs[index]['classification']}");
+          stream: collection
+              .where('userId', isEqualTo: uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text("Error");
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text("Loading ....");
+            }
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        SizedBox(height: 4.0),
-                        Text(
-                          "${snapshot.data?.docs[index]['classification']}",
-                          style: TextStyle(
-                            fontSize: 16.0,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 4.0),
+                              Text(
+                                "${snapshot.data?.docs[index]['classification']}",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height:10,),
-
-
+                        SizedBox(width: 10.0),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -71,8 +73,9 @@ class _PastDetectionState extends State<PastDetection> {
                               MaterialPageRoute(
                                 builder: (context) => ViewDetails(
                                   classificationName: "${snapshot.data?.docs[index]['classification']}",
-                                  treatment:"${snapshot.data?.docs[index]['treatment']}",
-                                      photoUrl: "${snapshot.data?.docs[index]['imgURL']}",),
+                                  treatment: "${snapshot.data?.docs[index]['treatment']}",
+                                  photoUrl: "${snapshot.data?.docs[index]['imgURL']}",
+                                ),
                               ),
                             );
                           },
@@ -85,18 +88,36 @@ class _PastDetectionState extends State<PastDetection> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 10.0),
+                        ElevatedButton(
+                          onPressed: () {
+                            String? docId = snapshot.data?.docs[index].id;
+                            collection
+                                .doc(docId)
+                                .delete();
+                          },
+                          child: Text('Delete'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            textStyle: TextStyle(fontSize: 16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   );
-                  },
-                );
-              }
-              return Text("loding");
-            }),
-
+                },
+              );
+            }
+            return Text("Loading");
+          },
+        ),
       ),
     );
   }
+
 
 
 

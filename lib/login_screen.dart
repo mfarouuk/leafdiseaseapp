@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:leafdisease/guest/guest_home_screen.dart';
 import 'package:leafdisease/home_screen.dart';
 import 'package:leafdisease/signup_screen.dart';
 
@@ -111,7 +112,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -127,28 +128,34 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                    // Container(
-                    //   width: double.infinity,
-                    //   color: Colors.lightBlue.shade900,
-                    //   child: MaterialButton(
-                    //     onPressed: () {
-                    //
-                    //         FirebaseAuth.instance.signInAnonymously(
-                    //
-                    //         ).then((value) {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => homeScreen()),
-                    //           );
-                    //         }).catchError((error) {});
-                    //
-                    //     },
-                    //     child: Text(
-                    //       'Continue as a Guest',
-                    //       style: TextStyle(color: Colors.white),
-                    //     ),
-                    //   ),
-                    // ),
+                    Center(child: Text('Or',style: TextStyle(fontSize: 18),)),
+                    SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      color: Colors.teal,
+                      child: MaterialButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signInAnonymously().then((value) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => guesthomeScreen()),
+                            );
+                          }).catchError((error) {});
+                        },
+                        child: Row( // Add a Row to contain the icon and text
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.person, color: Colors.white), // Add the desired icon
+                            SizedBox(width: 8.0), // Add some spacing between the icon and text
+                            Text(
+                              'Continue as a Guest',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
                   ],
                 ),
               ),

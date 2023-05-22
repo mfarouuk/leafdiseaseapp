@@ -64,6 +64,7 @@ class _guesthomeScreen extends State<guesthomeScreen> {
       _results=recognitions!;
       _image=image;
       imageSelect=true;
+      showWelcomeMessage=false;
     });
   }
 

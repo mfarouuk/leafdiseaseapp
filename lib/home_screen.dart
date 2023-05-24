@@ -73,135 +73,143 @@ class _homeScreen extends State<homeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            body: SpinCircleBottomBarHolder(
-                bottomNavigationBar: SCBottomBarDetails(
-                  items: [
-                    SCBottomBarItem(icon: Icons.home, onPressed: (){}),
-                    SCBottomBarItem(icon: Icons.account_circle, onPressed: (){
-                      clearResults();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  manageAccount()),
-
-
-                      );
-                    }),
-                  ],
-                  circleItems: [
-                    SCItem(icon: Icon(Icons.camera_alt), onPressed: pickFromCamera),
-                    SCItem(icon: Icon(Icons.photo), onPressed: pickFromGallery),
-
-                  ],
-
-
-
-                ),
-                child: Column(
-
-                    children: [
-                      Card(
-                        elevation: 4,
-                        margin: EdgeInsets.all(4.0),
-                        child: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Column(
+      child: Scaffold(
+        body: SpinCircleBottomBarHolder(
+          bottomNavigationBar: SCBottomBarDetails(
+            items: [
+              SCBottomBarItem(icon: Icons.home, onPressed: () {}),
+              SCBottomBarItem(
+                icon: Icons.account_circle,
+                onPressed: () {
+                  clearResults();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => manageAccount()),
+                  );
+                },
+              ),
+            ],
+            circleItems: [
+              SCItem(icon: Icon(Icons.camera_alt), onPressed: pickFromCamera),
+              SCItem(icon: Icon(Icons.photo), onPressed: pickFromGallery),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Card(
+                  elevation: 4,
+                  margin: EdgeInsets.all(4.0),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (showWelcomeMessage)
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (showWelcomeMessage)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Welcome to the Application!',
-                                      style: TextStyle(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(height: 16.0),
-                                    Text(
-                                      'Instructions:',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8.0),
-                                    Text(
-                                      '1. Press the + button located at the bottom of the screen.',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8.0),
-                                    Text(
-                                      '2. Choose whether to capture an image from the camera or select one from the gallery.',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8.0),
-                                    Text(
-                                      '3. The selected image will be displayed on the screen.',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8.0),
-                                    Text(
-                                      '4. If applicable, any detected results or classifications will be shown below the image.',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    SizedBox(height: 16.0),
-                                  ],
+                              Text(
+                                'Welcome to the Application!',
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              Column(
-                                children: [
-                                  if (_image != null)
-                                    Container(
-                                      margin: const EdgeInsets.all(10),
-                                      child: Image.file(_image!),
-                                    ),
-                                  if (_results != null)
-
-                                    ..._results!.map((result) {
-                                      showWelcomeMessage=false;
-                                      return Card(
-                                        color: Colors.limeAccent.shade100,
-                                        child: Container(
-                                          margin: const EdgeInsets.all(10),
-                                          child: Text(
-                                            result['label'].toString().split('label:').last,
-                                            style: const TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold,),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  Padding(
-                                    padding: const EdgeInsets.all(20.0),
+                              ),
+                              SizedBox(height: 16.0),
+                              Text(
+                                'Instructions:',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                '1. Press the + button located at the bottom of the screen.',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                '2. Choose whether to capture an image from the camera or select one from the gallery.',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                '3. The selected image will be displayed on the screen.',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                '4. If applicable, any detected results or classifications will be shown below the image.',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(height: 16.0),
+                            ],
+                          ),
+                        Column(
+                          children: [
+                            if (_image != null)
+                              Container(
+                                margin: const EdgeInsets.all(10),
+                                child: Image.file(_image!),
+                              ),
+                            if (_results != null)
+                              ..._results!.map((result) {
+                                showWelcomeMessage = false;
+                                return Card(
+                                  color: Colors.limeAccent.shade100,
+                                  child: Container(
+                                    margin: const EdgeInsets.all(10),
                                     child: Text(
-                                      getTreatment(_results.toString().split('label:').last.replaceAll(RegExp(r'[}\]]'), '')),
-
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-
+                                      result['label']
+                                          .toString()
+                                          .split('label:')
+                                          .last,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                ],
+                                );
+                              }).toList(),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                getTreatment(_results
+                                    .toString()
+                                    .split('label:')
+                                    .last
+                                    .replaceAll(RegExp(r'[}\]]'), '')),
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ])
-            )
-        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
+
 
   Future  pickFromGallery() async {
     final ImagePicker _picker = ImagePicker();

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
+
 class EditProfileScreen extends StatefulWidget {
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -11,9 +13,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final pwdController = TextEditingController();
-  bool nameEditable = false;
-  bool emailEditable = false;
-  bool pwdEditable = false;
+  bool isNameEditable = false;
+  bool isEmailEditable = false;
+  bool isPasswordEditable = false;
 
 
   @override
@@ -45,7 +47,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-
+                      style: ElevatedButton.styleFrom(primary: Colors.lightBlue.shade900),
                       onPressed: () {
                         _updateUserData();
                         Navigator.pop(
@@ -101,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-
+                      style: ElevatedButton.styleFrom(primary: Colors.lightBlue.shade900),
                       onPressed: () {
                         Navigator.pop(
                           context,
@@ -157,96 +159,125 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile'),
         backgroundColor: Colors.lightBlue.shade900,
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildFieldContainer(
-                'Name',
-                nameController,
-                nameEditable,
-                    () {
-                  setState(() => nameEditable = !nameEditable);
-                },
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: nameController,
+                      enabled: isNameEditable,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        labelText: "Name",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isNameEditable = !isNameEditable;
+                      });
+                    },
+                    icon: Icon(isNameEditable ? Icons.done : Icons.edit),
+                  ),
+                ],
               ),
-              _buildFieldContainer(
-                'Email',
-                emailController,
-                emailEditable,
-                    () {
-                  setState(() => emailEditable = false);
-                },
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: emailController,
+                      enabled: isEmailEditable,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isEmailEditable = !isEmailEditable;
+                      });
+                    },
+                    icon: Icon(isEmailEditable ? Icons.done : Icons.edit),
+                  ),
+                ],
               ),
-              _buildFieldContainer(
-                'Password',
-                pwdController,
-                pwdEditable,
-                    () {
-                  setState(() => pwdEditable = !pwdEditable);
-                },
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: pwdController,
+                      enabled: isPasswordEditable,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isPasswordEditable = !isPasswordEditable;
+                      });
+                    },
+                    icon: Icon(isPasswordEditable ? Icons.done : Icons.edit),
+                  ),
+                ],
               ),
-          SizedBox(height: 16),
-          Container(
-            width: 200,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.lightBlue.shade900),
-              onPressed: () => showConfirmationDialog(context),
-              child: Text('Save Changes'),
-            ),
-
-          ),
+              SizedBox(height: 16),
               Container(
-                width: 200,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                  onPressed: () => showCancelationDialog(context),
-                  child: Text('Cancel Changes'),
+                width: double.infinity,
+                color: Colors.lightBlue.shade900,
+                child: MaterialButton(
+                  onPressed: () {
+                    showConfirmationDialog(context);
+                  },
+                  child: Text(
+                    'Save Changes',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-
-              )
-
-            ],
-
-          ),
-
-        ),
-
-      ),
-    );
-  }
-
-  Widget _buildFieldContainer(String label, TextEditingController controller, bool editable, Function() onTap) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextFormField(
-              controller: controller,
-              obscureText: label == 'Password',
-              enabled: editable,
-              decoration: InputDecoration(
-                hintText: label,
-                border: OutlineInputBorder(),
               ),
-            ),
+              SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                color: Colors.red,
+                child: MaterialButton(
+                  onPressed: () {
+                    showCancelationDialog(context);
+                  },
+                  child: Text(
+                    'Cancel Changes',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: onTap,
-            icon: editable ? Icon(Icons.save) : Icon(Icons.edit),
-          ),
-        ],
+        ),
       ),
     );
-
-
   }
+
 }

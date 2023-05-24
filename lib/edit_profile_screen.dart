@@ -151,7 +151,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         'name': nameController.text.trim(),
         'email': emailController.text.trim(),
         'password': pwdController.text.trim(),
+
       });
+      FirebaseAuth.instance.currentUser?.updatePassword(pwdController.text.trim());
     }
    setState(() {
 

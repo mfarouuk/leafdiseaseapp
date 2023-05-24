@@ -102,7 +102,7 @@ class _homeScreen extends State<homeScreen> {
                     children: [
                       Card(
                         elevation: 4,
-                        margin: EdgeInsets.all(16.0),
+                        margin: EdgeInsets.all(4.0),
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Column(

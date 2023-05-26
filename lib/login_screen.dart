@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:leafdisease/guest/guest_home_screen.dart';
-import 'package:leafdisease/home_screen.dart';
-import 'package:leafdisease/signup_screen.dart';
+import 'package:Treet/guest/guest_home_screen.dart';
+import 'package:Treet/home_screen.dart';
+import 'package:Treet/signup_screen.dart';
 
 class Login extends StatefulWidget {
   @override

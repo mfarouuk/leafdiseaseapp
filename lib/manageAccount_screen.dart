@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:leafdisease/about_screen.dart';
-import 'package:leafdisease/edit_profile_screen.dart';
-import 'package:leafdisease/home_screen.dart';
-import 'package:leafdisease/login_screen.dart';
-import 'package:leafdisease/view_past_detections_screen.dart';
+import 'package:Treet/about_screen.dart';
+import 'package:Treet/edit_profile_screen.dart';
+import 'package:Treet/home_screen.dart';
+import 'package:Treet/login_screen.dart';
+import 'package:Treet/view_past_detections_screen.dart';
 
 
 class manageAccount extends StatefulWidget {

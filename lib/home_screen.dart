@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:spincircle_bottom_bar/modals.dart';
 import 'package:spincircle_bottom_bar/spincircle_bottom_bar.dart';
-import 'package:leafdisease/manageAccount_screen.dart';
+import 'package:Treet/manageAccount_screen.dart';
 import 'package:tflite/tflite.dart';
 
 

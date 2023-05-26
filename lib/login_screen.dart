@@ -1,3 +1,4 @@
+import 'package:Treet/forget_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,42 +59,59 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    TextFormField(
-                      controller: pwdController,
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: isObscure,
-                      onChanged: (String Value) {
-                        print(Value);
-                      },
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isObscure = !isObscure;
-                            });
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: pwdController,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: isObscure,
+                          onChanged: (String Value) {
+                            print(Value);
                           },
-                          icon: Icon(
-                            isObscure ? Icons.remove_red_eye : Icons.visibility_off,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isObscure = !isObscure;
+                                });
+                              },
+                              icon: Icon(
+                                isObscure ? Icons.remove_red_eye : Icons.visibility_off,
+                              ),
+                            ),
+                            border: OutlineInputBorder(),
                           ),
-                        ),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter a password';
-                        }
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a password';
+                            }
 
-                        return null;
-                      },
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10), // Add spacing between the TextFormField and Forgot Password button
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Forgetpassword()),
+                            );
+                          },
+                          child: Text("Forgot Password ?",textAlign:TextAlign.right ,),
+                        ),
+                      ],
                     ),
+
                     SizedBox(height: 30),
                     Container(
                       width: double.infinity,
                       color: Colors.lightBlue.shade900,
                       child: MaterialButton(
                         onPressed: () {
+
                           if (_formKey.currentState!.validate()) {
                             FirebaseAuth.instance.signInWithEmailAndPassword(
                               email: emailController.text,

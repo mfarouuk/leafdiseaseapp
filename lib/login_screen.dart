@@ -16,6 +16,7 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final pwdController = TextEditingController();
   bool isObscure = true;
+  String errorMessage = '';
 
   @override
   void dispose() {
@@ -49,13 +50,17 @@ class _LoginState extends State<Login> {
                           return 'Please enter a valid email';
                         }
                         return null;
-                      },onChanged: (String Value) {
-                      print(Value);
-                    },
+                      },
+                      onChanged: (String value) {
+                        setState(() {
+                          errorMessage = '';
+                        });
+                      },
                       decoration: InputDecoration(
                         labelText: "Email Address",
                         prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(),
+                        errorText: errorMessage.isNotEmpty ? errorMessage : null,
                       ),
                     ),
                     SizedBox(height: 20),
@@ -66,8 +71,10 @@ class _LoginState extends State<Login> {
                           controller: pwdController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: isObscure,
-                          onChanged: (String Value) {
-                            print(Value);
+                          onChanged: (String value) {
+                            setState(() {
+                              errorMessage = '';
+                            });
                           },
                           decoration: InputDecoration(
                             labelText: "Password",
@@ -83,16 +90,16 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             border: OutlineInputBorder(),
+                            errorText: errorMessage.isNotEmpty ? errorMessage : null,
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter a password';
                             }
-
                             return null;
                           },
                         ),
-                        SizedBox(height: 10), // Add spacing between the TextFormField and Forgot Password button
+                        SizedBox(height: 10),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -100,7 +107,7 @@ class _LoginState extends State<Login> {
                               MaterialPageRoute(builder: (context) => Forgetpassword()),
                             );
                           },
-                          child: Text("Forgot Password ?",textAlign:TextAlign.right ,),
+                          child: Text("Forgot Password ?", textAlign: TextAlign.right),
                         ),
                       ],
                     ),
@@ -111,7 +118,6 @@ class _LoginState extends State<Login> {
                       color: Colors.lightBlue.shade900,
                       child: MaterialButton(
                         onPressed: () {
-
                           if (_formKey.currentState!.validate()) {
                             FirebaseAuth.instance.signInWithEmailAndPassword(
                               email: emailController.text,
@@ -121,7 +127,11 @@ class _LoginState extends State<Login> {
                                 context,
                                 MaterialPageRoute(builder: (context) => homeScreen()),
                               );
-                            }).catchError((error) {});
+                            }).catchError((error) {
+                              setState(() {
+                                errorMessage = 'Invalid email or password';
+                              });
+                            });
                           }
                         },
                         child: Text(
@@ -146,7 +156,7 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                    Center(child: Text('Or',style: TextStyle(fontSize: 18),)),
+                    Center(child: Text('Or', style: TextStyle(fontSize: 18))),
                     SizedBox(height: 20),
                     Container(
                       width: double.infinity,
@@ -160,11 +170,11 @@ class _LoginState extends State<Login> {
                             );
                           }).catchError((error) {});
                         },
-                        child: Row( // Add a Row to contain the icon and text
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.person, color: Colors.white), // Add the desired icon
-                            SizedBox(width: 8.0), // Add some spacing between the icon and text
+                            Icon(Icons.person, color: Colors.white),
+                            SizedBox(width: 8.0),
                             Text(
                               'Continue as a Guest',
                               style: TextStyle(color: Colors.white),
@@ -173,7 +183,6 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -184,3 +193,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+

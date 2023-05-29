@@ -213,41 +213,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isEmailEditable = !isEmailEditable;
-                      });
-                    },
-                    icon: Icon(isEmailEditable ? Icons.done : Icons.edit),
-                  ),
                 ],
               ),
               SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: pwdController,
-                      enabled: isPasswordEditable,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPasswordEditable = !isPasswordEditable;
-                      });
-                    },
-                    icon: Icon(isPasswordEditable ? Icons.done : Icons.edit),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
+
               Container(
                 width: double.infinity,
                 color: Colors.lightBlue.shade900,

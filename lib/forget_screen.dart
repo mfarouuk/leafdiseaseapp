@@ -2,8 +2,6 @@ import 'package:Treet/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:Treet/guest/guest_home_screen.dart';
-import 'package:Treet/home_screen.dart';
 import 'package:Treet/signup_screen.dart';
 
 class Forgetpassword extends StatefulWidget {
@@ -17,12 +15,7 @@ class _Forgetpassword extends State<Forgetpassword> {
   final pwdController = TextEditingController();
   bool isObscure = true;
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    pwdController.dispose();
-    super.dispose();
-  }
+  String? emailError;
 
   @override
   Widget build(BuildContext context) {
@@ -42,45 +35,54 @@ class _Forgetpassword extends State<Forgetpassword> {
                     TextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (String value) {
+                        setState(() {
+                          emailError = null;
+                        });
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your email';
                         } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
-                        return null;
-                      },onChanged: (String Value) {
-                      print(Value);
-                    },
+                        return emailError;
+                      },
                       decoration: InputDecoration(
                         labelText: "Email Address",
                         prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(),
+                        errorText: emailError,
                       ),
                     ),
                     SizedBox(height: 20),
-
-
                     SizedBox(height: 30),
                     Container(
                       width: double.infinity,
                       color: Colors.lightBlue.shade900,
                       child: MaterialButton(
                         onPressed: () {
-
-              if (_formKey.currentState!.validate()) {
-                FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
-                    .then((value) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Login()),
-
-                  );
-                  setState(() {
-                    emailController.clear();
-                  });
-                }).catchError((error) {});
-              }
+                          if (_formKey.currentState!.validate()) {
+                            FirebaseAuth.instance.fetchSignInMethodsForEmail(emailController.text)
+                                .then((methods) {
+                              if (methods.isEmpty) {
+                                setState(() {
+                                  emailError = 'Email is invalid';
+                                });
+                              } else {
+                                FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
+                                    .then((value) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Login()),
+                                  );
+                                  setState(() {
+                                    emailController.clear();
+                                  });
+                                }).catchError((error) {});
+                              }
+                            });
+                          }
                         },
                         child: Text(
                           'Reset Password',
@@ -104,9 +106,6 @@ class _Forgetpassword extends State<Forgetpassword> {
                         ),
                       ],
                     ),
-
-
-
                   ],
                 ),
               ),

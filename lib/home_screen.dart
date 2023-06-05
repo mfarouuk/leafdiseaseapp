@@ -152,57 +152,9 @@ class _homeScreen extends State<homeScreen> {
                                   fontSize: 16.0,
                                 ),
                               ),
-                              SizedBox(height: 16.0),
-                              Text(
-                                'Additional Information about Leaves:',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'Leaves are important plant organs that perform various functions like photosynthesis, transpiration, and gas exchange.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'Leaves come in different shapes, sizes, and arrangements, which can help in identifying different plant species.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'Some common leaf shapes include oval, lanceolate, palmate, and pinnate.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'Leaves can also have various types of margins, such as entire, serrated, lobed, or toothed.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'The color of leaves can vary depending on factors like chlorophyll content and pigments.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 8.0),
-                              Text(
-                                'Observing and analyzing leaves can be useful in plant identification, ecological studies, and gardening.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 16.0),
+
+
+
                             ],
                           ),
                         Column(

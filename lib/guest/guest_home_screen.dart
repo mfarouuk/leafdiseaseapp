@@ -108,7 +108,7 @@ class _guesthomeScreen extends State<guesthomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Welcome to the Application!',
+                                'Welcome to the Treet!',
                                 style: TextStyle(
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
@@ -150,7 +150,9 @@ class _guesthomeScreen extends State<guesthomeScreen> {
                                   fontSize: 16.0,
                                 ),
                               ),
-                              SizedBox(height: 16.0),
+
+
+
                             ],
                           ),
                         Column(

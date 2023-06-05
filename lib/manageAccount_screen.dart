@@ -75,7 +75,7 @@ class _manageAccount extends State<manageAccount> {
         divider(),
 
         colortile(Icons.logout_outlined, Colors.red, "Logout", (){
-          print("Clicked");
+          FirebaseAuth.instance.signOut();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  Login()),
